@@ -12,6 +12,9 @@ export default class Pawn extends Piece {
         let location = board.findPiece(this);
         let direction = this.player === Player.WHITE ? 1 : -1;
 
+        if (location.row === 0 || location.row === 7) 
+            return [];
+
         let oneStep = Square.at(location.row + direction, location.col);
         let twoStep = Square.at(location.row + (2 * direction), location.col);
 
@@ -25,11 +28,12 @@ export default class Pawn extends Piece {
                 return [];
             }
         } else {
-           if (!isOccupiedOne) {
+            if (!isOccupiedOne) {
             if (!isOccupiedTwo) return [oneStep, twoStep];
             else return [oneStep];
-           } else return [];
+            } else return [];
         }
+
     }
 }
 
