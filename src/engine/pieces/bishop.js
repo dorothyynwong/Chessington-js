@@ -16,15 +16,39 @@ export default class Bishop extends Piece {
         const board_size = GameSettings.BOARD_SIZE;
 
         for (let i = 1; i <= board_size; i++) {
-            if (row + i < board_size && col + i < board_size) moves.push(Square.at(row + i, col + i));
-            if (row - i >= 0 && col - i >= 0) moves.push(Square.at(row - i, col - i));
+            if (row + i < board_size && col + i < board_size) {
+                let square = Square.at(row + i, col + i);
+                let piece = board.getPiece(square);
+                if (!piece) {
+                    moves.push(Square.at(row + i, col + i));
+                } else break;
+            }
+            if (row - i >= 0 && col - i >= 0) {
+                let square = Square.at(row - i, col - i);
+                let piece = board.getPiece(square);
+                if (!piece) {
+                    moves.push(Square.at(row - i, col - i));
+                } else break;
+            } 
+                
         }
 
         for (let j = 1; j <= board_size; j++) {
-            if (row + j < board_size && col - j >= 0) moves.push(Square.at(row + j, col - j));
-            if (row - j >= 0 && col + j < board_size) moves.push(Square.at(row - j, col + j));
+            if (row + j < board_size && col - j >= 0) {
+                let square = Square.at(row + j, col - j);
+                let piece = board.getPiece(square);
+                if (!piece) {
+                    moves.push(Square.at(row + j, col - j));
+                } else break;
+            } 
+            if (row - j >= 0 && col + j < board_size) {
+                let square = Square.at(row - j, col + j);
+                let piece = board.getPiece(square);
+                if (!piece) {
+                    moves.push(Square.at(row - j, col + j));
+                } else break;
+            }
         }
-        console.log(moves);
         return moves;
     }
 }
