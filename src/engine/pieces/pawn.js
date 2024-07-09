@@ -10,30 +10,26 @@ export default class Pawn extends Piece {
 
     getAvailableMoves(board) {
         let location = board.findPiece(this);
+        let direction = this.player === Player.WHITE ? 1 : -1;
 
-        if (this.player === Player.WHITE) {
-            let square = Square.at(location.row + 1, location.col);
-            //let isOccupied = board.getPiece(square);
-            let isOccupied = true;
-            if (board.getPiece(square) === undefined) isOccupied = false;
-            console.log("Is Occupied", isOccupied);
+        let oneStep = Square.at(location.row + direction, location.col);
+        let twoStep = Square.at(location.row + (2 * direction), location.col);
 
-            if (!isOccupied) {
-                if (this.hasPieceMoved) {
-                    return [Square.at(location.row + 1, location.col)] 
-                } else {
-                    return [Square.at(location.row + 1, location.col), Square.at(location.row + 2, location.col)]
-                }
+        let isOccupiedOne = board.getPiece(oneStep) === undefined ? false : true;
+        let isOccupiedTwo = board.getPiece(twoStep) === undefined ? false : true;
+
+        if (this.hasPieceMoved) {
+            if (!isOccupiedOne) {
+                return [oneStep];
             } else {
-                return []
+                return [];
             }
-            
         } else {
-            if (this.hasPieceMoved) {
-                return [Square.at(location.row - 1, location.col)] 
-            } else {
-                return [Square.at(location.row - 1, location.col), Square.at(location.row - 2, location.col)]
-            }
+           if (!isOccupiedOne) {
+            if (!isOccupiedTwo) return [oneStep, twoStep];
+            else return [oneStep];
+           } else return [];
         }
     }
 }
+
