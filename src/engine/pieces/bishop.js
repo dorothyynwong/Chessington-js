@@ -24,7 +24,6 @@ export default class Bishop extends Piece {
             if (row + j < board_size && col - j >= 0) moves.push(Square.at(row + j, col - j));
             if (row - j >= 0 && col + j < board_size) moves.push(Square.at(row - j, col + j));
         }
-        console.log(moves);
         return moves;
     }
 }
