@@ -1,5 +1,6 @@
 import Piece from './piece';
 import Square from '../square';
+import King from './king';
 
 export default class Rook extends Piece {
     constructor(player) {
@@ -19,7 +20,12 @@ export default class Rook extends Piece {
             let piece = board.getPiece(square);
             if (col !== i) {
                 if (piece === undefined) moves.push(square);
-                else break;
+                else {
+                    if (piece.player !== this.player && !(piece instanceof King)) {
+                        moves.push(square);
+                        break;
+                    } else break;
+                }
             } 
 
             // vertical moves
@@ -28,7 +34,12 @@ export default class Rook extends Piece {
 
             if (row !== i) {
                 if (piece === undefined) moves.push(square);
-                else break;
+                else {
+                    if (piece.player !== this.player && !(piece instanceof King)) {
+                        moves.push(square);
+                        break;
+                    } else break;
+                }
             } 
         }
 
@@ -64,3 +75,15 @@ export default class Rook extends Piece {
 }
 
 
+/*
+  0 1 2 3 4 5 6 7
+7
+6
+5
+4
+3   X R
+2
+1
+0      
+
+*/
