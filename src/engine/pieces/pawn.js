@@ -21,19 +21,17 @@ export default class Pawn extends Piece {
         let isOccupiedOne = board.getPiece(oneStep) === undefined ? false : true;
         let isOccupiedTwo = board.getPiece(twoStep) === undefined ? false : true;
 
+        let moves = []
+
         if (this.hasPieceMoved) {
-            if (!isOccupiedOne) {
-                return [oneStep];
-            } else {
-                return [];
-            }
+            if (!isOccupiedOne) moves.push(oneStep); 
         } else {
             if (!isOccupiedOne) {
-            if (!isOccupiedTwo) return [oneStep, twoStep];
-            else return [oneStep];
-            } else return [];
+            if (!isOccupiedTwo) moves.push(oneStep, twoStep);
+            else return moves.push(oneStep);
+            }
         }
-
+    return moves;
     }
 }
 

@@ -43,6 +43,17 @@ describe('Pawn', () => {
             moves.should.be.empty;
         });
 
+        /*it('can take opposing pieces diagonally up', () => {
+            const pawn = new Pawn(Player.WHITE);
+            const opposingPiece = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(4, 4), pawn);
+            board.setPiece(Square.at(5, 5), opposingPiece);
+    
+            const moves = pawn.getAvailableMoves(board);
+    
+            moves.should.deep.include(Square.at(5, 5));
+        })*/
+
     });
 
     describe('black pawns', () => {
@@ -79,6 +90,17 @@ describe('Pawn', () => {
 
             moves.should.be.empty;
         });
+
+        /*it('can take opposing pieces diagonally down', () => {
+            const pawn = new Pawn(Player.BLACK);
+            const opposingPiece = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(4, 4), pawn);
+            board.setPiece(Square.at(3, 3), opposingPiece);
+    
+            const moves = pawn.getAvailableMoves(board);
+    
+            moves.should.deep.include(Square.at(3, 3));
+        })*/
     });
 
     it('cannot move if there is a piece in front', () => {
@@ -102,5 +124,4 @@ describe('Pawn', () => {
 
         moves.should.not.deep.include(Square.at(4, 3));
     });
-
 });

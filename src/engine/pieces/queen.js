@@ -16,35 +16,61 @@ export default class Queen extends Piece {
 
         let moves = [];
 
-        for (let i=0; i<board_size; i++) {
-            // horizontal moves
+        // moves to right
+        for (let i=col+1; i<board_size; i++) {
             let square = Square.at(row, i);
             let piece = board.getPiece(square);
-            if (col !== i) {
-                if (piece === undefined) moves.push(square);
-                else {
-                    if (piece.player !== this.player && !(piece instanceof King)) {
-                        moves.push(square);
-                        break;
-                    } else break;
-                }
-            } 
-
-            // vertical moves
-            square = Square.at(i, col);
-            piece = board.getPiece(square);
-
-            if (row !== i) {
-                if (piece === undefined) moves.push(square);
-                else {
-                    if (piece.player !== this.player && !(piece instanceof King)) {
-                        moves.push(square);
-                        break;
-                    } else break;
-                }
-            } 
+            if (piece === undefined) moves.push(square);
+            else {
+                if (piece.player !== this.player && !(piece instanceof King)) {
+                    moves.push(square);
+                    break;
+                } else break;
+            }
         }
 
+        // moves to left
+        for (let i=col-1; i>=0; i--) {
+            let square = Square.at(row, i);
+            let piece = board.getPiece(square);
+            if (piece === undefined) moves.push(square);
+            else {
+                if (piece.player !== this.player && !(piece instanceof King)) {
+                    moves.push(square);
+                    break;
+                } else break;
+            }
+        }
+
+        // moves up
+        for (let i=row+1; i<board_size; i++) {
+            let square = Square.at(i, col);
+            let piece = board.getPiece(square);
+            if (piece === undefined) moves.push(square);
+            else {
+                if (piece.player !== this.player && !(piece instanceof King)) {
+                    moves.push(square);
+                    break;
+                } else break;
+            }
+        }
+
+        // moves down
+        for (let i=row-1; i>=0; i--) {
+            let square = Square.at(i, col);
+            let piece = board.getPiece(square);
+            if (piece === undefined) moves.push(square);
+            else {
+                if (piece.player !== this.player && !(piece instanceof King)) {
+                    moves.push(square);
+                    break;
+                } else break;
+            }
+        }
+
+        
+
+        // diagonal moves
         for (let i = 1; i <= board_size; i++) {
             if (row + i < board_size && col + i < board_size) {
                 let square = Square.at(row + i, col + i);
@@ -104,7 +130,7 @@ export default class Queen extends Piece {
             }
         }
 
-        return moves;
+        return moves
 
     }
 }
