@@ -1,6 +1,7 @@
 import Piece from './piece';
 import GameSettings from '../gameSettings';
 import Square from '../square';
+import King from './king';
 
 export default class Bishop extends Piece {
     constructor(player) {
@@ -21,14 +22,26 @@ export default class Bishop extends Piece {
                 let piece = board.getPiece(square);
                 if (!piece) {
                     moves.push(Square.at(row + i, col + i));
-                } else break;
+                } else {
+                    if (piece.player !== this.player && !(piece instanceof King)) {
+                        moves.push(square);
+                        break;
+                    } else break;
+
+                };
             }
             if (row - i >= 0 && col - i >= 0) {
                 let square = Square.at(row - i, col - i);
                 let piece = board.getPiece(square);
                 if (!piece) {
                     moves.push(Square.at(row - i, col - i));
-                } else break;
+                } else {
+                    if (piece.player !== this.player && !(piece instanceof King)) {
+                        moves.push(square);
+                        break;
+                    } else break;
+
+                };
             } 
                 
         }
@@ -39,14 +52,26 @@ export default class Bishop extends Piece {
                 let piece = board.getPiece(square);
                 if (!piece) {
                     moves.push(Square.at(row + j, col - j));
-                } else break;
+                } else {
+                    if (piece.player !== this.player && !(piece instanceof King)) {
+                        moves.push(square);
+                        break;
+                    } else break;
+
+                };
             } 
             if (row - j >= 0 && col + j < board_size) {
                 let square = Square.at(row - j, col + j);
                 let piece = board.getPiece(square);
                 if (!piece) {
                     moves.push(Square.at(row - j, col + j));
-                } else break;
+                } else {
+                    if (piece.player !== this.player && !(piece instanceof King)) {
+                        moves.push(square);
+                        break;
+                    } else break;
+
+                };
             }
         }
         return moves;
