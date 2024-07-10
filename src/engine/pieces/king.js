@@ -36,7 +36,7 @@ export default class King extends Piece {
         }*/
 
         let moves = []
-        
+
         for (let i = 0; i < board_size; i++) {
             if (possibleMoves[i].row < board_size 
                 && possibleMoves[i].row >= 0 
@@ -45,8 +45,6 @@ export default class King extends Piece {
                 moves.push(possibleMoves[i])
             }
         }
-
-        console.log(moves);
         return moves;
     }
 }
