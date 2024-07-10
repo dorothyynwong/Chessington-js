@@ -24,8 +24,17 @@ describe('Queen', () => {
             // Backward diagonal
             Square.at(1, 3), Square.at(2, 2), Square.at(3, 1), Square.at(4, 0)
         ];
-        
+
         moves.should.deep.include.members(expectedMoves);
+    })
+
+    it('cannot make any other moves', () => {
+        const queen = new Queen(Player.WHITE);
+        board.setPiece(Square.at(0, 4), queen);
+
+        const moves = queen.getAvailableMoves(board);
+
+        moves.should.have.length(21);
     })
 
 });

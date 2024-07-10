@@ -3,6 +3,7 @@ import Board from '../../../src/engine/board';
 import Player from '../../../src/engine/player';
 import Square from '../../../src/engine/square';
 import Pawn from '../../../src/engine/pieces/pawn';
+import King from '../../../src/engine/pieces/king';
 
 describe('Knight', () => {
 
@@ -43,5 +44,27 @@ describe('Knight', () => {
         const moves = knight.getAvailableMoves(board);
 
         moves.should.deep.include(Square.at(2, 5));
+    });
+
+    it('can take opposing pieces', () => {
+        const knight = new Knight(Player.WHITE);
+        const opposingPiece = new Pawn(Player.BLACK);
+        board.setPiece(Square.at(4, 4), knight);
+        board.setPiece(Square.at(5, 6), opposingPiece);
+
+        const moves = knight.getAvailableMoves(board);
+
+        moves.should.deep.include(Square.at(5, 6));
+    });
+
+    it('cannot take the opposing king', () => {
+        const knight = new Knight(Player.WHITE);
+        const opposingKing = new King(Player.BLACK);
+        board.setPiece(Square.at(4, 4), knight);
+        board.setPiece(Square.at(5, 6), opposingKing);
+
+        const moves = knight.getAvailableMoves(board);
+
+        moves.should.not.deep.include(Square.at(5, 6));
     });
 });
