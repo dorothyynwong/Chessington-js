@@ -21,9 +21,13 @@ export default class Knight extends Piece {
         let moves = []
 
         for (let i = 0; i < possibleMoves.length; i++) {
-            if (!(board.getPiece(possibleMoves[i]) instanceof King)) {
+            let piece = board.getPiece(possibleMoves[i]);
+            if (piece === undefined) {
                 moves.push(possibleMoves[i]);
-            } 
+            }  else {
+                if (piece.player !== this.player && !(piece instanceof King))
+                    moves.push(possibleMoves[i]);
+            }
         }
 
         return moves;

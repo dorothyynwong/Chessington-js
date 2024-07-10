@@ -67,4 +67,15 @@ describe('Knight', () => {
 
         moves.should.not.deep.include(Square.at(5, 6));
     });
+
+    it('cannot take friendly pieces', () => {
+        const knight = new Knight(Player.WHITE);
+        const friendlyPiece = new Pawn(Player.WHITE);
+        board.setPiece(Square.at(4, 4), knight);
+        board.setPiece(Square.at(5, 6), friendlyPiece);
+
+        const moves = knight.getAvailableMoves(board);
+
+        moves.should.not.deep.include(Square.at(5, 6));
+    });
 });
