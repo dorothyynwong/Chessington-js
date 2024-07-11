@@ -23,6 +23,17 @@ export default class Pawn extends Piece {
 
         let moves = []
 
+        const canCaptureOpponent = (row, col) => {
+            let piece = board.getPiece(Square.at(row, col));
+            if (piece !== undefined && piece.player !== this.player) 
+                return true;
+        }
+
+        if (canCaptureOpponent(location.row+direction, location.col+1))
+            moves.push(Square.at(location.row+direction, location.col+1));
+        if (canCaptureOpponent(location.row+direction, location.col-1))
+            moves.push(Square.at(location.row+direction, location.col-1));
+
         if (this.hasPieceMoved) {
             if (!isOccupiedOne) moves.push(oneStep); 
         } else {
@@ -31,6 +42,7 @@ export default class Pawn extends Piece {
             else return moves.push(oneStep);
             }
         }
+    console.log(moves);
     return moves;
     }
 }
